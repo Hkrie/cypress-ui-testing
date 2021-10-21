@@ -27,3 +27,6 @@ describe("testing functions with cypress", () => {
         })
     })
 })
+
+//todo browser-visit tests (in jest as well)
+//todo snapshot test
