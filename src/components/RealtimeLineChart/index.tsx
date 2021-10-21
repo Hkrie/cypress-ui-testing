@@ -8,7 +8,7 @@ import "./styles.css"
 import {getMantissaAndExponent} from "../../utils/scientificNotationHelper";
 import {ParameterFormat} from "../../interfaces/ParameterFormat";
 
-function hashCode(str) { // java String#hashCode
+export function hashCode(str: string) { // java String#hashCode
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
         hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -16,7 +16,7 @@ function hashCode(str) { // java String#hashCode
     return hash;
 }
 
-function intToRGB(i){
+export function intToRGB(i: number) {
     const c = (i & 0x00FFFFFF)
         .toString(16)
         .toUpperCase();
@@ -24,12 +24,12 @@ function intToRGB(i){
     return "00000".substring(0, 6 - c.length) + c;
 }
 
-function dataToLogScale(data: DataEntry[], lines: DataLine[]){
-    if(data) return data.map((item) => {
+function dataToLogScale(data: DataEntry[], lines: DataLine[]) {
+    if (data) return data.map((item) => {
         const result = {...item};
         lines.forEach((line) => {
             const value: any = item[line.dataKey]
-            if (value){
+            if (value) {
                 result[line.dataKey] = Math.log10(Number.parseFloat(value))
             }
         })
@@ -40,9 +40,9 @@ function dataToLogScale(data: DataEntry[], lines: DataLine[]){
 function logTickFormatter(logVal) {
     const val = logVal ? Math.pow(10, logVal) : logVal;
     const components = getMantissaAndExponent(val);
-    if (val && components){
+    if (val && components) {
         return `${components[0]} E${components[1]}`
-    }else if (val === 0){
+    } else if (val === 0) {
         return '1';
     }
     return '';
@@ -52,12 +52,12 @@ function scientificFormatter(val) {
     const sups = '⁰¹²³⁴⁵⁶⁷⁸⁹'.split('');
     const neg = '⁻';
     const components = getMantissaAndExponent(val);
-    if (val && components){
+    if (val && components) {
         let supExp = ("" + components[1]).split("").map(s => sups[+s]).join("");
-        if (components[1] < 0){
+        if (components[1] < 0) {
             supExp = `${neg}${supExp}`
         }
-        let base:any = components[0];
+        let base: any = components[0];
         if (base === 1) base = '';
         return `${base} 10${supExp}`
     }
@@ -75,6 +75,7 @@ interface DataLine {
 
 interface DataEntry {
     timestamp: number,
+
     [parameterId: string]: number,
 }
 
@@ -93,8 +94,7 @@ interface Props {
     showLegend?: boolean
 }
 
-function deepCompareEquals(a, b){
-
+export function deepCompareEquals(a: any, b: any): boolean {
     return _.isEqual(a, b);
 }
 
@@ -115,9 +115,9 @@ const RealtimeLineChart = (props: Props) => {
     const timerange = props.timerange || RealtimeLineChart.defaultProps.timerange;
     const startTime = new Date().getTime() - timerange;
 
-    const [data, setData] = useState(props.initValues?.length ? props.initValues : Array.from(new Array(timerange / interval)).map( (item, index) => ({
+    const [data, setData] = useState(props.initValues?.length ? props.initValues : Array.from(new Array(timerange / interval)).map((item, index) => ({
         timestamp: startTime + interval * index
-    })) )
+    })))
 
     const wrapperRef: any = useRef<any>();
     const size = useComponentSize(wrapperRef);
@@ -126,22 +126,22 @@ const RealtimeLineChart = (props: Props) => {
     const scale = props.scale;
 
     useEffect(() => {
-        const timer = setInterval(()=> {
+        const timer = setInterval(() => {
             setData((data) => {
                 const startTime = new Date().getTime() - timerange;
                 const now = new Date().getTime();
 
-                if (data && data.length){
+                if (data && data.length) {
                     let tmpData = _.orderBy(data, 'timestamp', 'asc');
 
                     // Fix gaps between initValues
-                    if(props.initValues && tmpData.length === props.initValues.length){
+                    if (props.initValues && tmpData.length === props.initValues.length) {
 
                         let values: any[] = [];
                         tmpData.forEach((item: any) => {
                             const valueKeys: string[] = Object.keys(item).filter((key: string) => key !== 'timestamp');
 
-                            if(valueKeys && valueKeys.length > 0){
+                            if (valueKeys && valueKeys.length > 0) {
                                 values = [
                                     ...values,
                                     ...valueKeys.map((key: string) => ({[key]: item[key]}))
@@ -150,17 +150,17 @@ const RealtimeLineChart = (props: Props) => {
                         });
 
                         tmpData.forEach((item: any, index: number) => {
-                            const intervalStartTimestamp: number = _.get(tmpData[index-1], 'timestamp', startTime);
-                            const intervalStartValue: object = values[index-1] || {};
+                            const intervalStartTimestamp: number = _.get(tmpData[index - 1], 'timestamp', startTime);
+                            const intervalStartValue: object = values[index - 1] || {};
 
                             const intervalStopTimestamp: number = item.timestamp;
                             const intervalStopValue: object = values[index];
 
-                            if(intervalStopTimestamp - intervalStartTimestamp > interval){
+                            if (intervalStopTimestamp - intervalStartTimestamp > interval) {
                                 const timeBetween = (intervalStopTimestamp - intervalStartTimestamp) / interval;
 
                                 let arrLength = Math.floor(timeBetween);
-                                if (arrLength > 0 && !Number.isNaN(arrLength) && arrLength < Math.pow(2,32)){
+                                if (arrLength > 0 && !Number.isNaN(arrLength) && arrLength < Math.pow(2, 32)) {
                                     tmpData = [
                                         ...tmpData,
                                         ...Array.apply(null, Array(arrLength)).map(function (_item: any, arrIndex: number) {
@@ -174,7 +174,7 @@ const RealtimeLineChart = (props: Props) => {
                                                 const m = (endValue - startValue) / (intervalStopTimestamp - intervalStartTimestamp);
                                                 const n = startValue - m * intervalStartTimestamp;
 
-                                                if(!valueObject[key]){
+                                                if (!valueObject[key]) {
                                                     valueObject[key] = m * timestamp + n;
                                                 }
                                             });
@@ -195,16 +195,16 @@ const RealtimeLineChart = (props: Props) => {
                     tmpData = tmpData.filter((item: any) => startTime <= item.timestamp && item.timestamp < now);
 
                     // Fix gaps if tab is changed
-                    if (tmpData && _.get(_.last(tmpData), 'timestamp', 0) < now-3*interval){
+                    if (tmpData && _.get(_.last(tmpData), 'timestamp', 0) < now - 3 * interval) {
 
                         let arrLength = Math.floor((now - _.get(_.last(tmpData), 'timestamp', 0)) / interval);
-                        if (arrLength > 0 && arrLength < Math.pow(2,32) && !Number.isNaN(arrLength)){
+                        if (arrLength > 0 && arrLength < Math.pow(2, 32) && !Number.isNaN(arrLength)) {
                             tmpData = [
                                 ...tmpData,
                                 ...Array.apply(null, Array(arrLength)).map(function (_item: any, index: number) {
                                     return {
                                         ..._.last(tmpData),
-                                        timestamp: _.get(_.last(tmpData), 'timestamp', 0)+index*interval
+                                        timestamp: _.get(_.last(tmpData), 'timestamp', 0) + index * interval
                                     }
                                 })
                             ]
@@ -217,7 +217,7 @@ const RealtimeLineChart = (props: Props) => {
                         {
                             timestamp: new Date().getTime(),
                             ...props.lines.reduce((acc: any, cur) => {
-                                acc[cur.dataKey] = _.get(props.currentValues,cur.dataKey)
+                                acc[cur.dataKey] = _.get(props.currentValues, cur.dataKey)
                                 return acc;
                             }, {})
                         }
@@ -229,28 +229,27 @@ const RealtimeLineChart = (props: Props) => {
 
                 // Init
                 let arrLength = Math.floor(timerange / interval);
-                if (arrLength > 0 && arrLength < Math.pow(2,32) && !Number.isNaN(arrLength)){
+                if (arrLength > 0 && arrLength < Math.pow(2, 32) && !Number.isNaN(arrLength)) {
                     arrLength = 0
                 }
-                return Array.apply(null, Array( arrLength)).map(function (_item: any, index: number) {
+                return Array.apply(null, Array(arrLength)).map(function (_item: any, index: number) {
                     return {
-                        timestamp: startTime+index*interval
+                        timestamp: startTime + index * interval
                     }
                 })
             })
 
-        },props.interval);
+        }, props.interval);
         return () => clearInterval(timer);
     }, [props.lines, props.currentValues].map(useDeepCompareMemoize))
 
 
-
-    const dataSeries = [[], ...props.lines.map( () => [])];
+    const dataSeries = [[], ...props.lines.map(() => [])];
     data.forEach((entry) => {
-        dataSeries[0].push(entry.timestamp/1000)
+        dataSeries[0].push(entry.timestamp / 1000)
         const startSeriesIndex = 1;
-        props.lines.forEach((line,index) => {
-            dataSeries[startSeriesIndex+index].push(entry[line.dataKey])
+        props.lines.forEach((line, index) => {
+            dataSeries[startSeriesIndex + index].push(entry[line.dataKey])
         })
 
     })
@@ -283,13 +282,13 @@ const RealtimeLineChart = (props: Props) => {
                 // [8]:   mode: 0: replace [1] -> [2-7], 1: concat [1] + [2-7]
                 values: [
                     // tick incr          default           year                             month    day                        hour     min                sec       mode
-                    [3600 * 24 * 365,   "{YYYY}",         null,                            null,    null,                      null,    null,              null,        1],
-                    [3600 * 24 * 28,    "{MMM}",          "\n{YYYY}",                      null,    null,                      null,    null,              null,        1],
-                    [3600 * 24,         "{MM}.{DD}",        "\n{YYYY}",                      null,    null,                      null,    null,              null,        1],
-                    [3600,              "{H}",        "\n{MM}.{DD}.{YYYY}",                null,    "\n{MM}.{DD}",               null,    null,              null,        1],
-                    [60,                "{H}:{mm}",   "\n{MM}.{DD}.{YYYY}",                null,    "\n{MM}.{DD}",               null,    null,              null,        1],
-                    [1,                 ":{ss}",          null,   null,    null,  null,    null,  null,        1],
-                    [0.001,             ":{ss}.{fff}",    "\n{MM}.{DD}.{YYYY} {H}:{mm}",   null,    "\n{MM}.{DD} {H}:{mm}",  null,    "\n{H}:{mm}",  null,        1],
+                    [3600 * 24 * 365, "{YYYY}", null, null, null, null, null, null, 1],
+                    [3600 * 24 * 28, "{MMM}", "\n{YYYY}", null, null, null, null, null, 1],
+                    [3600 * 24, "{MM}.{DD}", "\n{YYYY}", null, null, null, null, null, 1],
+                    [3600, "{H}", "\n{MM}.{DD}.{YYYY}", null, "\n{MM}.{DD}", null, null, null, 1],
+                    [60, "{H}:{mm}", "\n{MM}.{DD}.{YYYY}", null, "\n{MM}.{DD}", null, null, null, 1],
+                    [1, ":{ss}", null, null, null, null, null, null, 1],
+                    [0.001, ":{ss}.{fff}", "\n{MM}.{DD}.{YYYY} {H}:{mm}", null, "\n{MM}.{DD} {H}:{mm}", null, "\n{H}:{mm}", null, 1],
                 ],
             },
             ...props.lines.map((line) => {
@@ -297,9 +296,9 @@ const RealtimeLineChart = (props: Props) => {
                     size: 50,
                     values: (self, ticks) => {
                         return ticks.map((rawValue, index) => {
-                            if (line.format === 'scientific'){
+                            if (line.format === 'scientific') {
                                 const components = getMantissaAndExponent(rawValue);
-                                if (components && components[0] !== 1) return ;
+                                if (components && components[0] !== 1) return;
                                 return scientificFormatter(rawValue)
                             }
                             return rawValue
@@ -313,12 +312,10 @@ const RealtimeLineChart = (props: Props) => {
         ],
         scales: {
             y: scale === 'log' ? {distr: 3} : undefined,
-            x: { time: true }
+            x: {time: true}
         },
         series: [
-            {
-
-            },
+            {},
             ...props.lines.map((line) => {
                 return {
                     show: true,
@@ -331,16 +328,17 @@ const RealtimeLineChart = (props: Props) => {
         ]
     }
 
-    const lasttimestamp = _.get(_.last(data),'timestamp');
+    const lasttimestamp = _.get(_.last(data), 'timestamp');
 
-    return <div  className={`realtime-line-chart ${props.showLegend ? '' : 'hide-legend'}`}>
+    return <div className={`realtime-line-chart ${props.showLegend ? '' : 'hide-legend'}`}>
         {
             options.width ? <UplotReact
                 options={options}
                 data={dataSeries as any}
             /> : null
         }
-    <div ref={wrapperRef} className={"time-bar text-right"}>{lasttimestamp ? moment(lasttimestamp).format('HH:mm') : null}</div>
+        <div ref={wrapperRef}
+             className={"time-bar text-right"}>{lasttimestamp ? moment(lasttimestamp).format('HH:mm') : null}</div>
     </div>
 
 }

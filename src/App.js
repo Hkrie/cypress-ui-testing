@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-// import './App.css';
 import RealtimeLineChart from "./components/RealtimeLineChart";
 import {useEffect, useState} from "react";
 
