@@ -3,6 +3,7 @@ import _ from 'lodash';
 import moment from "moment";
 import UplotReact from 'uplot-react';
 import useComponentSize from '../../hooks/useComponentSize';
+import "./styles.css"
 
 import {getMantissaAndExponent} from "../../utils/scientificNotationHelper";
 import {ParameterFormat} from "../../interfaces/ParameterFormat";

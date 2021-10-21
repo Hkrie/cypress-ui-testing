@@ -1,0 +1,55 @@
+/*! CSS Used from: Embedded */
+:not(.sb-show-nopreview) > .sb-nopreview,:not(.sb-show-errordisplay) > .sb-errordisplay{display:none;}
+.sb-show-main.sb-main-padded{margin:0;padding:1rem;display:block;}
+.sb-wrapper{position:fixed;top:0;bottom:0;left:0;right:0;padding:20px;font-family:"Nunito Sans", -apple-system, ".SFNSText-Regular", "San Francisco", BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;-webkit-font-smoothing:antialiased;overflow:auto;}
+.sb-heading{font-size:14px;font-weight:600;letter-spacing:0.2px;margin:10px 0;padding-right:25px;}
+.sb-nopreview{display:flex;align-content:center;justify-content:center;}
+.sb-nopreview_main{margin:auto;padding:30px;border-radius:10px;background:rgba(0,0,0,0.03);}
+.sb-nopreview_heading{text-align:center;}
+.sb-errordisplay{border:20px solid rgb(187, 49, 49);background:#222;color:#fff;z-index:999999;}
+.sb-errordisplay_code{padding:10px;background:#000;color:#eee;font-family:"Operator Mono", "Fira Code Retina", "Fira Code", "FiraCode-Retina", "Andale Mono", "Lucida Console", Consolas, Monaco, monospace;}
+.sb-errordisplay pre{white-space:pre-wrap;}
+/*! CSS Used from: Embedded */
+html,body{width:100%;height:100%;}
+*,*::before,*::after{box-sizing:border-box;}
+html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+body{margin:0;color:rgba(0, 0, 0, 0.85);font-size:14px;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';font-variant:tabular-nums;line-height:1.5715;background-color:#fff;font-feature-settings:'tnum', "tnum";}
+h1{margin-top:0;margin-bottom:0.5em;color:rgba(0, 0, 0, 0.85);font-weight:500;}
+p{margin-top:0;margin-bottom:1em;}
+ul{margin-top:0;margin-bottom:1em;}
+pre,code{font-size:1em;font-family:'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;}
+pre{margin-top:0;margin-bottom:1em;overflow:auto;}
+table{border-collapse:collapse;}
+::-moz-selection{color:#fff;background:#1890ff;}
+::selection{color:#fff;background:#1890ff;}
+html{--antd-wave-shadow-color:#1890ff;--scroll-bar:0;}
+/*! CSS Used from: Embedded */
+.uplot,.uplot *,.uplot *::before,.uplot *::after{box-sizing:border-box;}
+.uplot{font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";line-height:1.5;width:-webkit-min-content;width:-moz-min-content;width:min-content;}
+.u-wrap{position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+.u-over,.u-under{position:absolute;}
+.u-under{overflow:hidden;}
+.uplot canvas{display:block;position:relative;width:100%;height:100%;}
+.u-legend{font-size:14px;margin:auto;text-align:center;}
+.u-inline{display:block;}
+.u-inline *{display:inline-block;}
+.u-inline tr{margin-right:16px;}
+.u-legend th{font-weight:600;}
+.u-legend th > *{vertical-align:middle;display:inline-block;}
+.u-legend .u-marker{width:1em;height:1em;margin-right:4px;background-clip:content-box!important;}
+.u-inline.u-live th::after{content:":";vertical-align:middle;}
+.u-series > *{padding:4px;}
+.u-series th{cursor:pointer;}
+.u-select{background:rgba(0,0,0,0.07);position:absolute;pointer-events:none;}
+.u-cursor-x,.u-cursor-y{position:absolute;left:0;top:0;pointer-events:none;will-change:transform;z-index:100;}
+.u-hz .u-cursor-x{height:100%;border-right:1px dashed #607D8B;}
+.u-hz .u-cursor-y{width:100%;border-bottom:1px dashed #607D8B;}
+.u-cursor-pt{position:absolute;top:0;left:0;border-radius:50%;pointer-events:none;will-change:transform;z-index:100;background-clip:content-box!important;}
+.u-cursor-x.u-off,.u-cursor-y.u-off,.u-cursor-pt.u-off{display:none;}
+/*! CSS Used from: Embedded */
+#root{height:100%;}
+.realtime-line-chart{margin-right:-25px;}
+.realtime-line-chart .time-bar{padding-right:25px;margin-top:-15px;}
+.uplot .u-over{border:1px solid #eee;}
+.realtime-line-chart.hide-legend .u-legend{display:none;}
+.text-right{text-align:right;}

@@ -11207,10 +11207,10 @@ upath@^1.1.1, upath@^1.1.2, upath@^1.2.0:
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.2.0.tgz#8f66dbcd55a883acdae4408af8b035a5044c1894"
   integrity sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==
 
-uplot-react@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/uplot-react/-/uplot-react-1.1.1.tgz#b3203f4948d68fa1ced0a35e3b7a69c0b98bf67f"
-  integrity sha512-zCvwyZVm4nfYDi+KjaK0FppqftGzga/x+u0h2baRWj1vXMB9/hfJ1qb9gXAdXMfp17C9Rk57HoZDE9MewNWLfg==
+uplot-react@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/uplot-react/-/uplot-react-1.1.0.tgz#708e8a07df08f5ea8f0266231e4aa40bf04db276"
+  integrity sha512-tU6noQZ7UbXWLEAMPPJyhHfoR1aDFYh8yo2hBHiFRcy7FtmupVXOKBfvyGhO8laMyM3G1v529KL9o3bDBJOtYg==
 
 uplot@1.6.13:
   version "1.6.13"
