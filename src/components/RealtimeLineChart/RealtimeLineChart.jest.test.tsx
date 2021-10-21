@@ -20,47 +20,67 @@ test("converts string to java hashcode", () => {
     ).toBe(1438309220)
 })
 
-test("converts integer to rgb", () => {
-    expect(
-        intToRGB(1438309220)
-    ).toBe("BADB64")
+describe("converts integer to rgb", () => {
+    it("given normal sized int, return correct hashcode", () => {
+        expect(
+            intToRGB(1438309220)
+        ).toBe("BADB64")
+    })
 
-    expect(
-        intToRGB(1438309220000000000)
-    ).toBe("44E800")
+    it("given over sized int, return correct hashcode", () => {
+        expect(
+            intToRGB(1438309220000000000)
+        ).toBe("44E800")
+    })
 
-    expect(
-        intToRGB(143)
-    ).toBe("00008F")
+    it("given under sized int, return correct hashcode", () => {
+        expect(
+            intToRGB(143)
+        ).toBe("00008F")
+    })
 
-    expect(
-        intToRGB("456u789fh")
-    ).toThrowError();
+    it("given a string as an argument, throw error", () => {
+        expect(
+            intToRGB("456u789fh")
+        ).toThrowError();
+    })
+
 })
 
-test("check if two values are equal", () => {
-    expect(
-        deepCompareEquals(1, 2)
-    ).toBe(false)
+describe("check if two values are equal", () => {
+    it("given 1 and 2 as arguments, return false", () => {
+        expect(
+            deepCompareEquals(1, 2)
+        ).toBe(false)
+    })
 
-    expect(
-        deepCompareEquals(1, 1)
-    ).toBe(true)
+    it("given 1 and 1 as arguments, return true", () => {
+        expect(
+            deepCompareEquals(1, 1)
+        ).toBe(true)
+    })
 
-    expect(
-        deepCompareEquals("Hallo", "Hallo")
-    ).toBe(true)
+    it("given 'Hallo' and 'Hallo' as arguments, return true", () => {
+        expect(
+            deepCompareEquals("Hallo", "Hallo")
+        ).toBe(true)
+    })
 
-    expect(
-        deepCompareEquals("Hallo", "hallo")
-    ).toBe(false)
+    it("given 'Hallo' and 'hallo' as arguments, return false", () => {
+        expect(
+            deepCompareEquals("Hallo", "hallo")
+        ).toBe(false)
+    })
 
-    expect(
-        deepCompareEquals({"sex": "male", "age": 21}, {"sex": "male", "age": 21})
-    ).toBe(true)
+    it("given two equal objects as arguments, return true", () => {
+        expect(
+            deepCompareEquals({"sex": "male", "age": 21}, {"sex": "male", "age": 21})
+        ).toBe(true)
+    })
+
 })
 
-it("renders without crashing", () => {
+test("renders without crashing", () => {
     const container = document.createElement('div');
     const chart = <RealtimeLineChart
         lines={[{
