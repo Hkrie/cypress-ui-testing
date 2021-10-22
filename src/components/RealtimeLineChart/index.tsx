@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import _ from 'lodash';
 import moment from "moment";
 import UplotReact from 'uplot-react';
+
 import useComponentSize from '../../hooks/useComponentSize';
 import "./styles.css"
 
@@ -330,7 +331,9 @@ const RealtimeLineChart = (props: Props) => {
 
     const lasttimestamp = _.get(_.last(data), 'timestamp');
 
-    return <div className={`realtime-line-chart ${props.showLegend ? '' : 'hide-legend'}`}>
+    return <div
+        data-test={"realtime-line-chart"}
+        className={`realtime-line-chart ${props.showLegend ? '' : 'hide-legend'}`}>
         {
             options.width ? <UplotReact
                 options={options}
@@ -338,6 +341,7 @@ const RealtimeLineChart = (props: Props) => {
             /> : null
         }
         <div ref={wrapperRef}
+             data-test={"current-time"}
              className={"time-bar text-right"}>{lasttimestamp ? moment(lasttimestamp).format('HH:mm') : null}</div>
     </div>
 

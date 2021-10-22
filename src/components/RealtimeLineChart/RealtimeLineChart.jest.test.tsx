@@ -1,4 +1,4 @@
-import "../../config/matchMedia.mock";
+// import "../../config/matchMedia.mock";
 import * as ReactDOM from "react-dom";
 import RealtimeLineChart, {deepCompareEquals, hashCode, intToRGB} from "./index";
 import {render} from "@testing-library/react";
