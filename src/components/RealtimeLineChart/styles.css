@@ -49,7 +49,7 @@ html{--antd-wave-shadow-color:#1890ff;--scroll-bar:0;}
 /*! CSS Used from: Embedded */
 #root{height:100%;}
 .realtime-line-chart{margin-right:-25px;}
-.realtime-line-chart .time-bar{padding-right:25px;margin-top:-15px;}
+.realtime-line-chart .time-bar{padding-right:25px;margin-top:-25px;width:500px}
 .uplot .u-over{border:1px solid #eee;}
 .realtime-line-chart.hide-legend .u-legend{display:none;}
 .text-right{text-align:right;}

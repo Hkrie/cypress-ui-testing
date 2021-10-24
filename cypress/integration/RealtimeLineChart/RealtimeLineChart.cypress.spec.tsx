@@ -2,17 +2,17 @@
 
 import moment from "moment";
 
-describe('testing component - RealtimeLineChart with cypress', () => {
+describe('testing component - RealtimeLineChart', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/')
     })
-
 
     it('displays realtime chart', () => {
         cy
             .get('[data-test=realtime-line-chart]')
             .should("have.length", 1)
     })
+
     it('display current time', () => {
         const date = new Date();
         cy
@@ -27,6 +27,7 @@ describe('testing component - RealtimeLineChart with cypress', () => {
             .get('.u-value:nth-child(2)')
             .contains(14)
     })
+
 
     it('display Time on hover', () => {
         const date = new Date();
