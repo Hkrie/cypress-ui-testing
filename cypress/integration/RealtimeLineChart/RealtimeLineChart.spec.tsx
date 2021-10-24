@@ -2,7 +2,7 @@
 
 describe("testing functions with cypress", () => {
     beforeEach(() => {
-        cy.visit('http://localhost:3000/')
+        cy.visit('/')
     })
         it('displays realtime chart', () => {
             cy

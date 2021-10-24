@@ -4,7 +4,7 @@ import moment from "moment";
 
 describe('testing component - RealtimeLineChart', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:3000/')
+        cy.visit('/')
     })
 
     it('displays realtime chart', () => {
